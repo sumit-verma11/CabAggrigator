@@ -1,0 +1,189 @@
+@import "tailwindcss";
+
+/* =========================================================================
+   RideCompare — dark, glassy, premium. Frosted surfaces over a deep
+   background with teal/violet glow. Semantic tokens; component class names
+   kept stable so markup stays clean.
+   ========================================================================= */
+:root {
+  --bg: #06070d;
+  --bg-2: #0a0c16;
+  --teal: #00e0a4;
+  --violet: #8b7bff;
+
+  --surface: rgba(255, 255, 255, 0.045);
+  --surface-2: rgba(255, 255, 255, 0.08);
+  --border: rgba(255, 255, 255, 0.1);
+  --border-strong: rgba(255, 255, 255, 0.18);
+
+  --text: #eef1f8;
+  --muted: #99a1b8;
+  --faint: #6b7186;
+
+  --primary-fg: #04120d;
+  --accent: #00e0a4;
+  --accent-fg: #04120d;
+  --accent-soft: rgba(0, 224, 164, 0.14);
+  --accent-text: #5eead4;
+
+  --ring: rgba(0, 224, 164, 0.25);
+  --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.4);
+  --shadow-md: 0 18px 44px -18px rgba(0, 0, 0, 0.75);
+}
+
+@theme inline {
+  --color-bg: var(--bg);
+  --color-surface: var(--surface);
+  --color-surface-2: var(--surface-2);
+  --color-border: var(--border);
+  --color-border-strong: var(--border-strong);
+  --color-text: var(--text);
+  --color-muted: var(--muted);
+  --color-faint: var(--faint);
+  --color-accent: var(--accent);
+  --color-accent-fg: var(--accent-fg);
+  --color-accent-soft: var(--accent-soft);
+  --color-accent-text: var(--accent-text);
+  --color-teal: var(--teal);
+  --color-violet: var(--violet);
+  --color-primary-fg: var(--primary-fg);
+  --font-sans: var(--font-geist-sans);
+}
+
+* {
+  box-sizing: border-box;
+}
+html,
+body {
+  padding: 0;
+  margin: 0;
+}
+html {
+  color-scheme: dark;
+}
+
+body {
+  background-color: var(--bg);
+  background-image:
+    radial-gradient(1100px 640px at 82% -8%, rgba(139, 123, 255, 0.2), transparent 60%),
+    radial-gradient(900px 560px at -6% 6%, rgba(0, 224, 164, 0.16), transparent 56%),
+    linear-gradient(180deg, var(--bg) 0%, var(--bg-2) 100%);
+  background-attachment: fixed;
+  color: var(--text);
+  font-family: var(--font-sans), system-ui, sans-serif;
+  min-height: 100dvh;
+  -webkit-font-smoothing: antialiased;
+  letter-spacing: -0.011em;
+}
+
+/* ---- Frosted components ---- */
+.glass {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+}
+
+.card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  box-shadow: var(--shadow-sm);
+}
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  font-weight: 600;
+  border-radius: 10px;
+  transition:
+    background 0.15s ease,
+    border-color 0.15s ease,
+    box-shadow 0.15s ease,
+    opacity 0.15s ease,
+    transform 0.1s ease;
+  white-space: nowrap;
+}
+.btn-primary {
+  background: linear-gradient(100deg, var(--teal), var(--violet));
+  color: var(--primary-fg);
+}
+.btn-primary:hover {
+  box-shadow: 0 0 0 1px var(--border), 0 10px 26px -12px rgba(0, 224, 164, 0.6);
+}
+.btn-accent {
+  background: var(--accent);
+  color: var(--accent-fg);
+}
+.btn-accent:hover {
+  box-shadow: 0 10px 26px -12px rgba(0, 224, 164, 0.7);
+}
+.btn-secondary {
+  background: var(--surface-2);
+  color: var(--text);
+  border: 1px solid var(--border);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+}
+.btn-secondary:hover {
+  border-color: var(--border-strong);
+}
+.btn:active {
+  transform: translateY(1px);
+}
+.btn:disabled {
+  opacity: 0.55;
+  pointer-events: none;
+}
+
+.field {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  transition:
+    border-color 0.15s ease,
+    box-shadow 0.15s ease;
+}
+.field:focus-within {
+  border-color: var(--border-strong);
+  box-shadow: 0 0 0 4px var(--ring);
+}
+
+.chip {
+  border: 1px solid var(--border);
+  background: var(--surface);
+  border-radius: 9999px;
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+}
+
+/* Overlay surfaces (dropdowns/menus) must be OPAQUE so content behind them
+   doesn't bleed through the glass. */
+.popover {
+  background: #10131f;
+  border: 1px solid var(--border-strong);
+  border-radius: 12px;
+  box-shadow: var(--shadow-md);
+}
+
+.divider {
+  border-color: var(--border);
+}
+
+.gradient-text {
+  background: linear-gradient(100deg, #fff 20%, var(--teal) 60%, var(--violet) 95%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  * {
+    transition: none !important;
+    animation: none !important;
+  }
+}
