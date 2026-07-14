@@ -140,8 +140,9 @@ function AutocompleteField({
         /* fall through to offline suggestions */
       }
       if (list.length === 0) list = poiFallback(v);
-      setSuggestions(list);
-      setOpen(list.length > 0);
+      const unique = [...new Set(list)]; // Photon can return duplicates
+      setSuggestions(unique);
+      setOpen(unique.length > 0);
     }, 250);
   }
 
@@ -170,8 +171,8 @@ function AutocompleteField({
       </label>
       {open && (
         <ul className="popover absolute z-40 mt-1.5 max-h-60 w-full overflow-auto p-1.5">
-          {suggestions.map((s) => (
-            <li key={s}>
+          {suggestions.map((s, i) => (
+            <li key={`${s}-${i}`}>
               <button
                 type="button"
                 onMouseDown={(e) => {
